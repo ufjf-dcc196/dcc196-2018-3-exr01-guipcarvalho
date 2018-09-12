@@ -1,5 +1,6 @@
 package br.ufjf.dcc196.dcc196_2018_3_exr01_guipcarvalho;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     public static int countAluno = 0;
     public static int countExterno = 0;
     public static int countServidor = 0;
+
+    private static final int REQUEST_CODE = 1;
 
     private Button btnAluno;
     private Button btnExterno;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,AlunoActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,ExternoActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -55,15 +58,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,ServidorActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        atualizaCounts();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MainActivity.REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            atualizaCounts();
+        }
     }
 
     private void atualizaCounts()

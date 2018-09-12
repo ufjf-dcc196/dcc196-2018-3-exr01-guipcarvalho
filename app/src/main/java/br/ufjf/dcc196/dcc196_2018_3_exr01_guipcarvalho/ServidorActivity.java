@@ -1,5 +1,6 @@
 package br.ufjf.dcc196.dcc196_2018_3_exr01_guipcarvalho;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class ServidorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.countServidor++;
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         });
